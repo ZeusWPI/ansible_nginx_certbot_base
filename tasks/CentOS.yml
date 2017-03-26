@@ -1,0 +1,11 @@
+---
+- name: Install nginx on CentOS
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - epel-release
+    - nginx
+    - openssl
+

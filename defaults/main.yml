@@ -1,0 +1,24 @@
+---
+# Dict to select the nginx_user and nginx_home from.
+nginx_user_for:
+  ubuntu: www-data
+  debian: www-data
+  centos: nginx
+nginx_home_for:
+  ubuntu: /var/www/
+  debian: /var/www/
+  centos: /var/lib/nginx/
+
+# User as who the nginx executable will run
+nginx_user: "{{ nginx_user_for[ansible_distribution] }}"
+
+# Homedir of this user
+nginx_home: "{{ nginx_home_for[ansible_distribution] }}"
+
+# Length of the diffie-hellman parameter,
+# the higher this number, the longer it takes to generate!
+nginx_dh_length: 2048
+
+# Where the nginx configuration is stored.
+# Changing this will break a lot of stuff.
+nginx_conf_dir: /etc/nginx/

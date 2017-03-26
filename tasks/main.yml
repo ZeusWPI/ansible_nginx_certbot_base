@@ -30,11 +30,14 @@
     dest: /etc/nginx/nginx.conf
   notify: Restart nginx
 
-- name: Copy snippets
+- name: Copy snippets & other configfiles
   copy:
-    src: "snippets/"
-    dest: "{{ nginx_conf_dir }}/snippets/"
+    src: "{{ item }}/"
+    dest: "{{ nginx_conf_dir }}/{{ item }}/"
   notify: Restart nginx
+  with_items:
+    - conf.d
+    - snippets
 
 # We do this before nginx is (re)started
 # because we do not want to break a running

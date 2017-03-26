@@ -1,7 +1,7 @@
-Role Name
+NGINX base
 =========
 
-A role to install NGINX.
+A role to install NGINX. Can be used with `ZeusWPI.nginx_vhost` to install vhosts.
 
 Requirements
 ------------
@@ -26,8 +26,8 @@ This example will install this role:
 ```
     - hosts: servers
       roles:
-         - role: R13N.nginx
-           tags: nginx_base
+         - role: ZeusWPI.nginx_base
+           tags: nginx
 ```
 But you probably want to add this as a dependency, or use the `nginx_vhost` role.
 

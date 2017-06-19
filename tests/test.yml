@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - nginx_base
+    - nginx_certbot_base

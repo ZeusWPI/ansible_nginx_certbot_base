@@ -1,0 +1,11 @@
+[Unit]
+Description=Renewal each {{ certbot_interval }} of our letsencrypt certificates.
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec={{ certbot_interval }}
+RandomizedDelaySec={{ certbot_delay }}
+Persistent=true
+
+[Install]
+WantedBy=timers.target

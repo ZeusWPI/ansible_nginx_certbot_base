@@ -1,0 +1,38 @@
+---
+- name: Ensure the web folder exists
+  file:
+    name: "{{ letsencrypt_webroot }}"
+    state: directory
+    mode: "u=rwx,g=rx,o=rx"
+
+- name: Create config/cert directory and make it readable for group
+  file:
+    path: "{{ letsencrypt_conf_dir }}"
+    state: directory
+    group: "{{ letsencrypt_group }}"
+    mode: "u=rwx,g=rx,o="
+    recurse: yes
+
+- name: Copy systemd unit and timer files
+  template:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+  with_items:
+    - certbot.service
+    - certbot.timer
+  register: letsencrypt_systemd_files
+
+- name: Reload systemd daemon if unit or timer file changed
+  command: systemctl daemon-reload
+  when: letsencrypt_systemd_files.changed
+
+- name: Start and enable systemd timer
+  service:
+    name: certbot.timer
+    state: started
+    enabled: yes
+
+- name: Start the service once (to test if everything works)
+  service:
+    name: certbot.service
+    state: started

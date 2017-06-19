@@ -1,9 +1,15 @@
 ---
+
+  ##################
+  # Nginx Defaults #
+  ##################
+
 # Dict to select the nginx_user and nginx_home from.
 nginx_user_for:
   ubuntu: www-data
   debian: www-data
   centos: nginx
+
 nginx_home_for:
   ubuntu: /var/www/
   debian: /var/www/
@@ -22,3 +28,32 @@ nginx_dh_length: 2048
 # Where the nginx configuration is stored.
 # Changing this will break a lot of stuff.
 nginx_conf_dir: /etc/nginx/
+
+
+  ########################
+  # Letsencrypt defaults #
+  ########################
+
+# Add users to this group to give them read access
+# to the certificates
+letsencrypt_group: letsencrypt
+
+# Where the challenge responses are placed
+# Will be world-readable
+letsencrypt_web_dir: /var/lib/letsencrypt
+
+# Where certificates and their configurations are stored
+# only readable by the group {{ letsencrypt_user }}
+letsencrypt_conf_dir: /etc/letsencrypt
+
+# Guaranteed interval between each renewal
+certbot_interval: 12h
+
+# Upper limit for the randomized delay that is added to
+# the normal interval
+certbot_delay: 12h
+
+# When true: do not actually request certificates
+# For testing & debugging purposes
+certbot_dry_run: false
+

@@ -1,0 +1,21 @@
+---
+- name: Install openssl and nginx
+  apt:
+    pkg: "{{ item  }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - openssl
+    - nginx
+
+- name: Add jessie-backports repository (needed for certbot)
+  apt_repository:
+    repo: deb http://ftp.debian.org/debian jessie-backports main
+    state: present
+
+- name: Install certbot
+  apt:
+    pkg: certbot
+    state: latest
+    default_release: jessie-backports
+    update_cache: yes

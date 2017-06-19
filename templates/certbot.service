@@ -1,0 +1,12 @@
+[Unit]
+Description=Renew letsencrypt certificates with certbot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/nginx -t
+ExecStart=/usr/bin/certbot renew \
+{% if certbot_dry_run %}
+            --dry-run
+{% endif %}
+            --renew-hook "systemctl reload nginx" \
+            --agree-tos

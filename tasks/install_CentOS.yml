@@ -1,5 +1,5 @@
 ---
-- name: Install nginx on CentOS
+- name: Install nginx and certbot on CentOS
   yum:
     name: "{{ item }}"
     state: latest
@@ -8,4 +8,5 @@
     - epel-release
     - nginx
     - openssl
+    - certbot
 

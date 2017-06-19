@@ -7,7 +7,7 @@
     system: yes
 
 - name: Distribution specific installation
-  include: "{{ ansible_distribution }}.yml"
+  include: "install_{{ ansible_distribution }}.yml"
   tags:
     - install
 
@@ -16,37 +16,13 @@
   args:
     creates: "/etc/ssl/certs/dhparam.pem"
 
-- name: Create vhost directories
-  file:
-    dest: "{{ nginx_conf_dir }}/{{ item }}"
-    state: directory
-  with_items:
-    - sites-enabled
-    - sites-available
+- name: Configure nginx
+  include: "nginx.yml"
+  tags:
+    - nginx
 
-- name: Copy config
-  template:
-    src: nginx.conf
-    dest: /etc/nginx/nginx.conf
-  notify: Restart nginx
+- name: Configure certbot
+  include: "certbot"
+  tags:
+    - certbot
 
-- name: Copy snippets & other configfiles
-  copy:
-    src: "{{ item }}/"
-    dest: "{{ nginx_conf_dir }}/{{ item }}/"
-  notify: Restart nginx
-  with_items:
-    - conf.d
-    - snippets
-
-# We do this before nginx is (re)started
-# because we do not want to break a running
-# nginx instance.
-- name: Check configuration
-  command: /usr/sbin/nginx -t
-
-- name: Ensure nginx is enabled & running
-  service:
-    name: nginx
-    state: started
-    enabled: yes

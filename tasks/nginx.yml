@@ -22,6 +22,11 @@
     - conf.d
     - snippets
 
+- name: Remove default vhost
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
 # We do this before nginx is (re)started
 # because we do not want to break a running
 # nginx instance.

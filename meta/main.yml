@@ -2,7 +2,7 @@ galaxy_info:
   author: Rien Maertens
   description: |
     A role to deploy a base installation of NGINX and letsencrypt.
-    To actually install sites, the roles nginx_vhost and certbot_domain are needed.
+    To actually install sites, the roles nginx_vhost and nginx_certbot_domain are needed.
   company: Zeus WPI
 
   # If the issue tracker for your role is not on github, uncomment the

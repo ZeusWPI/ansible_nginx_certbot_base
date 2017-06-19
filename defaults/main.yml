@@ -40,7 +40,7 @@ letsencrypt_group: letsencrypt
 
 # Where the challenge responses are placed
 # Will be world-readable
-letsencrypt_web_dir: /var/lib/letsencrypt
+letsencrypt_webroot: /var/lib/letsencrypt
 
 # Where certificates and their configurations are stored
 # only readable by the group {{ letsencrypt_user }}

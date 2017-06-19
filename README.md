@@ -2,7 +2,7 @@ NGINX & Certbot base installation
 =========
 
 A role to deploy a base installation of NGINX and certbot (letsencrypt).
-To actually install sites, the roles nginx_vhost and certbot_domain are needed.
+To actually install sites, the roles nginx_vhost and nginx_certbot_domain are needed.
 
 Requirements
 ------------
@@ -30,7 +30,7 @@ This example will install this role:
          - role: ZeusWPI.nginx_certbot_base
            tags: nginx
 ```
-But you probably want to add this as a dependency, or use the `ZeusWPI.nginx_vhost` and `ZeusWPI.certbot_domain` roles which have this role as a dependency.
+But you probably want to add this as a dependency, or use the `ZeusWPI.nginx_vhost` and `ZeusWPI.nginx_certbot_domain` roles which have this role as a dependency.
 
 License
 -------
